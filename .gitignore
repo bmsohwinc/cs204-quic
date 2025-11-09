@@ -4,3 +4,7 @@
 venv
 
 build/
+
+# logs
+*_log.json
+
