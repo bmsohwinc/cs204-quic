@@ -7,4 +7,7 @@ build/
 
 # logs
 *_log.json
+*.csv
 
+
+.ipynb_checkpoints/
