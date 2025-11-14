@@ -24,6 +24,7 @@ python examples/http3_client.py --ca-certs tests/pycacert.pem https://localhost:
 ## Advanced
 - Start server as before
 - Run below bash script to vary network conditions using tc/netem
+    - ensure you modify experiment parameters before running
 ```sh
-
+./evaluate.sh
 ```
