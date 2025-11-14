@@ -36,7 +36,72 @@ class QLogAnalyzer():
 
         self._save_to_csv("cwnd", cwnd_data)
         return cwnd_data
-        
+    
+    def analyze_rtt(self) -> list[dict]:
+        rtt_data = []
+        for trace in self.log_data.get("traces", []):
+            for event in trace["events"]:
+                if event["name"] == "recovery:metrics_updated":
+                    data = event["data"]
+                    rtt_data.append({
+                        "time": event["time"],
+                        "min_rtt":     data.get("min_rtt"),
+                        "smoothed_rtt": data.get("smoothed_rtt"),
+                        "latest_rtt":   data.get("latest_rtt"),
+                        "rtt_variance": data.get("rtt_variance"),
+                    })
+
+        self._save_to_csv("rtt", rtt_data)
+        return rtt_data
+    
+    def analyze_loss(self) -> list[dict]:
+        loss_events = [] 
+        for trace in self.log_data.get("traces", []):
+            for event in trace["events"]:
+                if event["name"] == "recovery:packet_lost":
+                    data = event["data"]
+                    loss_events.append({
+                        "time": event["time"],
+                        "packet_number": data.get("packet_number"),
+                        "packet_type": data.get("packet_type"),
+                        "trigger": data.get("trigger"),
+                    })
+
+        self._save_to_csv("loss", loss_events)
+        return loss_events
+    
+    def analyze_goodput(self):
+        total_bytes = 0
+        t_first = None
+        t_last = None
+
+        for trace in self.log_data["traces"]:
+            for ev in trace["events"]:
+                t = ev["time"]
+
+                # keep track of active duration
+                if t_first is None:
+                    t_first = t
+                t_last = t
+
+                if ev["name"] == "http:frame_parsed":
+                    frame = ev["data"].get("frame", {})
+                    if frame.get("frame_type") == "data":
+                        total_bytes += ev["data"].get("length", 0)
+
+        if t_first is None or t_last is None:
+            return {"bytes": 0, "duration": 0.0, "goodput_mbps": 0.0}
+
+        duration_sec = (t_last - t_first) / 1000.0  # qlog time is in ms
+        goodput_mbps = (total_bytes * 8) / (duration_sec * 1e6)
+
+        return {
+            "bytes": total_bytes,
+            "duration": duration_sec,
+            "goodput_mbps": goodput_mbps,
+        }
+
+
     def _read_log_file(self):
         if not self.log_path:
             raise Exception("log_path is None")

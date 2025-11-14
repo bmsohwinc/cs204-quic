@@ -1,0 +1,2 @@
+- Logs are stored in directories.
+- Each experiment has a separate trace file

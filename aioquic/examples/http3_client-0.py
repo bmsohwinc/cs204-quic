@@ -48,7 +48,7 @@ def qlog_filename():
 
 def write_qlog():
     print("Writing qlog...")
-    with open(args.qlog_filename, "w") as f:
+    with open(qlog_filename(), "w") as f:
         json.dump(ql.to_dict(), f)
     print("qlog written.")
 
@@ -307,41 +307,6 @@ async def perform_http_request(
                 http_events=http_events, include=include, output_file=output_file
             )
 
-async def generate_load(
-    client: HttpClient,
-    url: str,
-    data: Optional[str],
-    include: bool,
-    output_dir: Optional[str],
-    rps: float,
-    duration: float,
-) -> None:
-    """
-    Fire HTTP requests at roughly `rps` for `duration` seconds.
-    """
-    interval = 1.0 / rps
-    loop = asyncio.get_running_loop()
-    end_time = loop.time() + duration
-    pending = []
-
-    while loop.time() < end_time:
-        # fire one request (you can also randomize data/path if you want)
-        coro = perform_http_request(
-            client=client,
-            url=url,
-            data=data,
-            include=include,
-            output_dir=output_dir,
-        )
-        # run it concurrently so we can maintain rate even if responses are slow
-        pending.append(asyncio.create_task(coro))
-
-        await asyncio.sleep(interval)
-
-    # wait for all outstanding requests to finish
-    if pending:
-        await asyncio.gather(*pending, return_exceptions=True)
-
 
 def process_http_pushes(
     client: HttpClient,
@@ -466,33 +431,21 @@ async def main(
 
             await ws.close()
         else:
-            if args.load_rps > 0.0 and args.load_duration > 0.0:
-                logger.info(">>> Generating load...")
-                await generate_load(
+            # perform request
+            coros = [
+                perform_http_request(
                     client=client,
-                    url=urls[0],
+                    url=url,
                     data=data,
                     include=include,
                     output_dir=output_dir,
-                    rps=args.load_rps,
-                    duration=args.load_duration,
                 )
-            else:
-                # perform request
-                coros = [
-                    perform_http_request(
-                        client=client,
-                        url=url,
-                        data=data,
-                        include=include,
-                        output_dir=output_dir,
-                    )
-                    for url in urls
-                ]
-                await asyncio.gather(*coros)
+                for url in urls
+            ]
+            await asyncio.gather(*coros)
 
-                # process http pushes
-                process_http_pushes(client=client, include=include, output_dir=output_dir)
+            # process http pushes
+            process_http_pushes(client=client, include=include, output_dir=output_dir)
         client.close(error_code=ErrorCode.H3_NO_ERROR)
 
 
@@ -610,24 +563,6 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--zero-rtt", action="store_true", help="try to send requests using 0-RTT"
-    )
-    parser.add_argument(
-        "--load-rps",
-        type=float,
-        default=0.0,
-        help="target HTTP request rate (requests per second)",
-    )
-    parser.add_argument(
-        "--load-duration",
-        type=float,
-        default=0.0,
-        help="load duration in seconds",
-    )
-    parser.add_argument(
-        "--qlog-filename",
-        type=str,
-        default=qlog_filename(),
-        help="filename to store the qlog dump",
     )
 
     args = parser.parse_args()
