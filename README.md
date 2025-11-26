@@ -8,7 +8,17 @@ Instructor: [Prof. Zhaowei Tan](https://cs.ucr.edu/~ztan/)
 - Setup a QUIC testbed to study packet metrics
 
 # Setup
-- [aioquic](https://github.com/aiortc/aioquic)
+- Clone [aioquic](https://github.com/aiortc/aioquic)
+- Run below installs once inside the virtual env:
+```sh
+brew install openssl
+
+export CFLAGS=-I$(brew --prefix openssl)/include
+export LDFLAGS=-L$(brew --prefix openssl)/lib
+
+pip install . dnslib jinja2 starlette wsproto
+```
+
 
 # Test
 ## Basic
@@ -28,3 +38,7 @@ python examples/http3_client.py --ca-certs tests/pycacert.pem https://localhost:
 ```sh
 ./evaluate.sh
 ```
+
+## Connection migration tests
+- Check the `quiche/` directory
+- Coming soon...

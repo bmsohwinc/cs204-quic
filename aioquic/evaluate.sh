@@ -11,9 +11,15 @@ COMMON_CLIENT_ARGS="--load-rps 100 --load-duration ${DURATION} --insecure"
 LOG_DIR="pkt_logs/$(date +'%Y-%m-%d_%H-%M-%S')"
 mkdir -p "$LOG_DIR"
 
+if command -v sudo >/dev/null 2>&1; then
+    SUDO=sudo
+else
+    SUDO=
+fi
+
 reset_qdisc() {
     echo "  [tc] Resetting qdisc on lo"
-    sudo tc qdisc del dev lo root 2>/dev/null || true
+    $SUDO tc qdisc del dev lo root 2>/dev/null || true
 }
 
 run_experiment() {
@@ -33,11 +39,11 @@ run_experiment() {
         echo "  [tc] Baseline: no shaping"
     else
         echo "  [tc] Adding netem (${netem_args})"
-        sudo tc qdisc add dev lo root handle 1: netem ${netem_args}
+        $SUDO tc qdisc add dev lo root handle 1: netem ${netem_args}
 
         if [[ -n "${rate}" ]]; then
             echo "  [tc] Adding TBF rate limit (${rate})"
-            sudo tc qdisc add dev lo parent 1:1 handle 2: tbf \
+            $SUDO tc qdisc add dev lo parent 1:1 handle 2: tbf \
                 rate "${rate}" burst 32kbit latency 400ms
         fi
 
