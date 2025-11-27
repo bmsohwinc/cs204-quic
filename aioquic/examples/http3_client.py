@@ -47,6 +47,7 @@ def qlog_filename():
     return f"pkt_logs/client_{ts}_log.json"
 
 def write_qlog():
+    return
     print("Writing qlog...")
     with open(args.qlog_filename, "w") as f:
         json.dump(ql.to_dict(), f)

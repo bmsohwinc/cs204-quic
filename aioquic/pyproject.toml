@@ -44,6 +44,9 @@ Homepage = "https://github.com/aiortc/aioquic"
 Changelog = "https://aioquic.readthedocs.io/en/stable/changelog.html"
 Documentation = "https://aioquic.readthedocs.io/"
 
+[project.scripts]
+qtb = "qtb.cli:main"
+
 [tool.coverage.run]
 source = ["aioquic"]
 
@@ -68,3 +71,4 @@ known-third-party = ["aioquic"]
 
 [tool.setuptools.dynamic]
 version = {attr = "aioquic.__version__"}
+

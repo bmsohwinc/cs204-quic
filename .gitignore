@@ -8,6 +8,6 @@ build/
 # logs
 *_log.json
 *.csv
-
+*.qlog
 
 .ipynb_checkpoints/

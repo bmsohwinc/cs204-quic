@@ -1,0 +1,7 @@
+experiments:
+  e0:
+    status: done
+    log_dir: /workspace/runs/rtt_demo/e0
+  e1:
+    status: done
+    log_dir: /workspace/runs/rtt_demo/e1

@@ -1,0 +1,15 @@
+implementations:
+  aioquic:
+    type: local                  # for now; later: docker, ssh, etc.
+    default_port: 4433
+    server_cmd: >
+      python3 examples/http3_server.py
+      --certificate tests/ssl_cert.pem --private-key tests/ssl_key.pem
+      --host {server_ip} --port {port}
+      --quic-log {qlog_dir}
+    client_cmd: >
+      python3 examples/http3_client.py
+      --ca-certs tests/pycacert.pem
+      https://{server_ip}:{port}/
+      --load-rps {rps} --load-duration {duration}
+      --quic-log {qlog_dir}

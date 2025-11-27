@@ -59,7 +59,8 @@ run_experiment() {
     python3 examples/http3_client.py \
         "${URL}" \
         ${COMMON_CLIENT_ARGS} \
-        --qlog-filename "${qlog_path}"
+        --quic-log "/workspace/runs/test/"
+        # --qlog-filename "${qlog_path}"
 
     echo "  [client] Done. qlog stored."
 
@@ -72,29 +73,29 @@ run_experiment() {
 # N, Label, netem_args, rate
 run_experiment 0 "Baseline: no tc" "" ""
 
-run_experiment 1 "RTT=10ms, 0% loss, 20Mbit" "delay 5ms" "20mbit"
-run_experiment 2 "RTT=10ms, 0.5% loss, 20Mbit" "delay 5ms" "20mbit"
-run_experiment 3 "RTT=10ms, 2% loss, 20Mbit" "delay 5ms" "20mbit"
+# run_experiment 1 "RTT=10ms, 0% loss, 20Mbit" "delay 5ms" "20mbit"
+# run_experiment 2 "RTT=10ms, 0.5% loss, 20Mbit" "delay 5ms" "20mbit"
+# run_experiment 3 "RTT=10ms, 2% loss, 20Mbit" "delay 5ms" "20mbit"
 
-run_experiment 4 "RTT=10ms, 0% loss, 10Mbit" "delay 5ms" "10mbit"
-run_experiment 5 "RTT=10ms, 0.5% loss, 10Mbit" "delay 5ms" "10mbit"
-run_experiment 6 "RTT=10ms, 2% loss, 10Mbit" "delay 5ms" "10mbit"
+# run_experiment 4 "RTT=10ms, 0% loss, 10Mbit" "delay 5ms" "10mbit"
+# run_experiment 5 "RTT=10ms, 0.5% loss, 10Mbit" "delay 5ms" "10mbit"
+# run_experiment 6 "RTT=10ms, 2% loss, 10Mbit" "delay 5ms" "10mbit"
 
-run_experiment 7 "RTT=50ms, 0% loss, 20Mbit" "delay 25ms" "20mbit"
-run_experiment 8 "RTT=50ms, 0.5% loss, 20Mbit" "delay 25ms" "20mbit"
-run_experiment 9 "RTT=50ms, 2% loss, 20Mbit" "delay 25ms" "20mbit"
+# run_experiment 7 "RTT=50ms, 0% loss, 20Mbit" "delay 25ms" "20mbit"
+# run_experiment 8 "RTT=50ms, 0.5% loss, 20Mbit" "delay 25ms" "20mbit"
+# run_experiment 9 "RTT=50ms, 2% loss, 20Mbit" "delay 25ms" "20mbit"
 
-run_experiment 10 "RTT=50ms, 0% loss, 10Mbit" "delay 25ms" "10mbit"
-run_experiment 11 "RTT=50ms, 0.5% loss, 10Mbit" "delay 25ms" "10mbit"
-run_experiment 12 "RTT=50ms, 2% loss, 10Mbit" "delay 25ms" "10mbit"
+# run_experiment 10 "RTT=50ms, 0% loss, 10Mbit" "delay 25ms" "10mbit"
+# run_experiment 11 "RTT=50ms, 0.5% loss, 10Mbit" "delay 25ms" "10mbit"
+# run_experiment 12 "RTT=50ms, 2% loss, 10Mbit" "delay 25ms" "10mbit"
 
-run_experiment 13 "RTT=100ms, 0% loss, 20Mbit" "delay 50ms" "20mbit"
-run_experiment 14 "RTT=100ms, 0.5% loss, 20Mbit" "delay 50ms" "20mbit"
-run_experiment 15 "RTT=100ms, 2% loss, 20Mbit" "delay 50ms" "20mbit"
+# run_experiment 13 "RTT=100ms, 0% loss, 20Mbit" "delay 50ms" "20mbit"
+# run_experiment 14 "RTT=100ms, 0.5% loss, 20Mbit" "delay 50ms" "20mbit"
+# run_experiment 15 "RTT=100ms, 2% loss, 20Mbit" "delay 50ms" "20mbit"
 
-run_experiment 16 "RTT=100ms, 0% loss, 10Mbit" "delay 50ms" "10mbit"
-run_experiment 17 "RTT=100ms, 0.5% loss, 10Mbit" "delay 50ms" "10mbit"
-run_experiment 18 "RTT=100ms, 2% loss, 10Mbit" "delay 50ms" "10mbit"
+# run_experiment 16 "RTT=100ms, 0% loss, 10Mbit" "delay 50ms" "10mbit"
+# run_experiment 17 "RTT=100ms, 0.5% loss, 10Mbit" "delay 50ms" "10mbit"
+# run_experiment 18 "RTT=100ms, 2% loss, 10Mbit" "delay 50ms" "10mbit"
 
 
 echo

@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     net-tools \
     build-essential \
     libssl-dev \
+    nano \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
