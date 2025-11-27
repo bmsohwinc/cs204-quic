@@ -1,35 +1,18 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import argparse
 import os
 import subprocess
 from pathlib import Path
-from typing import Any, Dict
 
-import yaml
-
-# Base directory for configs and state.
-# You can override by setting QTB_CONFIG_DIR in the environment.
-REPO_ROOT = Path(__file__).resolve().parent.parent   # /workspace/aioquic
-CONFIG_DIR = REPO_ROOT / "configs"
-HOSTS_FILE = CONFIG_DIR / "hosts.yml"
-IMPL_FILE = CONFIG_DIR / "implementations.yml"
-EXPERIMENTS_DIR = CONFIG_DIR / "experiments"
-RUNS_DIR = REPO_ROOT / "runs"
-
-
-# ---------- Helpers ----------
-
-def load_yaml(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with path.open() as f:
-        return yaml.safe_load(f) or {}
-
-
-def save_yaml(path: Path, data: Dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w") as f:
-        yaml.safe_dump(data, f, sort_keys=False)
+from .utils import (
+    HOSTS_FILE,
+    EXPERIMENTS_DIR,
+    load_yaml,
+    save_yaml,
+)
+from .runs import run_suite, show_suite_status, create_analysis_placeholder
 
 
 # ---------- add-host / add-link ----------
@@ -69,7 +52,7 @@ def cmd_create_exps(args: argparse.Namespace) -> None:
         print(f"{exp_path} already exists. Use --force to overwrite.")
         return
 
-    # Simple starter template – you’ll edit this after creation.
+    # Starter template – edit this as needed.
     template = {
         "suite": {
             "name": args.name,
@@ -77,7 +60,8 @@ def cmd_create_exps(args: argparse.Namespace) -> None:
             "src": "h1",
             "dest": "h2",
             "link": "lo",
-            "duration": 30,
+            "duration": 30,       # default load duration (seconds)
+            "load_rps": 100,      # default load RPS
             "compare_tcp": True,
             "metrics": ["cwnd", "goodput"],
         },
@@ -87,6 +71,9 @@ def cmd_create_exps(args: argparse.Namespace) -> None:
                 "loss_pct": 0.0,
                 "bw_mbit": 20,
                 "delay_ms": 5,
+                # optional overrides:
+                # "duration": 30,
+                # "load_rps": 100,
             },
             "e1": {
                 "rtt_ms": 50,
@@ -104,191 +91,21 @@ def cmd_create_exps(args: argparse.Namespace) -> None:
         subprocess.call([editor, str(exp_path)])
 
 
-# ---------- config loaders ----------
-
-def load_impl(name: str) -> Dict[str, Any]:
-    cfg = load_yaml(IMPL_FILE)
-    impls = cfg.get("implementations", {})
-    if name not in impls:
-        raise SystemExit(f"Implementation '{name}' not found in {IMPL_FILE}")
-    return impls[name]
-
-
-def load_hosts() -> Dict[str, Any]:
-    cfg = load_yaml(HOSTS_FILE)
-    return {
-        "hosts": cfg.get("hosts", {}),
-        "links": cfg.get("links", {}),
-    }
-
-
-# ---------- status handling ----------
-
-def update_status(suite_name: str, exp_name: str, status: str, log_dir: Path) -> None:
-    status_file = RUNS_DIR / suite_name / "status.yml"
-    st = load_yaml(status_file)
-    exps = st.get("experiments", {})
-    exps[exp_name] = {
-        "status": status,
-        "log_dir": str(log_dir),
-    }
-    st["experiments"] = exps
-    save_yaml(status_file, st)
-
-
-# ---------- core runner ----------
-
-def run_single_experiment(
-    suite: Dict[str, Any],
-    exp_name: str,
-    params: Dict[str, Any],
-    hosts_cfg: Dict[str, Any],
-) -> None:
-    suite_name = suite["name"]
-    impl_name = suite["implementation"]
-    impl = load_impl(impl_name)
-    hosts = hosts_cfg["hosts"]
-    links = hosts_cfg["links"]
-    rps = suite["rps"]
-    duration = suite["duration"]
-
-    src = hosts.get(suite["src"])
-    dest = hosts.get(suite["dest"])
-    link = links.get(suite["link"])
-
-    if not src or not dest or not link:
-        raise SystemExit("Invalid src/dest/link in suite; check hosts.yml")
-
-    log_dir = RUNS_DIR / suite_name / exp_name
-    log_dir.mkdir(parents=True, exist_ok=True)
-
-    update_status(suite_name, exp_name, "running", log_dir)
-
-    # TODO: apply tc netem based on `link` + `params`
-    print(f"[{suite_name}/{exp_name}] Would apply netem on {link['iface']} with:")
-    print(
-        f"  rtt={params['rtt_ms']}ms loss={params['loss_pct']}% "
-        f"bw={params['bw_mbit']}Mbit delay={params['delay_ms']}ms"
-    )
-
-    # Build commands from implementation template
-    port = impl.get("default_port", 4433)
-    server_ip = src["ip"]
-    client_ip = dest["ip"]
-
-    server_qlog_dir = log_dir / "server"
-    client_qlog_dir = log_dir / "client"
-
-    server_qlog_dir.mkdir(parents=True, exist_ok=True)
-    client_qlog_dir.mkdir(parents=True, exist_ok=True)
-    
-    server_qlog_dir_path = str(server_qlog_dir)
-    client_qlog_dir_path = str(client_qlog_dir)
-
-    server_cmd_tpl = impl["server_cmd"]
-    client_cmd_tpl = impl["client_cmd"]
-
-    server_cmd = server_cmd_tpl.format(
-        server_ip=server_ip,
-        client_ip=client_ip,
-        port=port,
-        qlog_dir=server_qlog_dir_path,
-        exp_name=exp_name,
-    )
-    client_cmd = client_cmd_tpl.format(
-        server_ip=server_ip,
-        client_ip=client_ip,
-        port=port,
-        qlog_dir=client_qlog_dir_path,
-        exp_name=exp_name,
-        rps=rps,
-        duration=duration,
-    )
-
-    impl_type = impl.get("type", "local")
-
-    print(f"[{suite_name}/{exp_name}] Running implementation '{impl_name}' ({impl_type})")
-    print(f"  Server: {server_cmd}")
-    print(f"  Client: {client_cmd}")
-
-    # For now, we only support 'local' execution as a placeholder.
-    # Real version: branch here for docker/ssh etc.
-    if impl_type == "local":
-        server_proc = subprocess.Popen(server_cmd, shell=True)
-        try:
-            client_rc = subprocess.call(client_cmd, shell=True)
-        finally:
-            server_proc.terminate()
-            server_proc.wait()
-        if client_rc == 0:
-            update_status(suite_name, exp_name, "done", log_dir)
-        else:
-            update_status(suite_name, exp_name, "failed", log_dir)
-    else:
-        print("NOTE: Non-local implementations are not yet implemented.")
-        update_status(suite_name, exp_name, "skipped", log_dir)
-
+# ---------- run / show / analyze wrappers ----------
 
 def cmd_run(args: argparse.Namespace) -> None:
     exp_path = Path(args.experiments).resolve()
-    cfg = load_yaml(exp_path)
-    if "suite" not in cfg or "experiments" not in cfg:
-        raise SystemExit(f"{exp_path} does not look like a qtb experiments file")
+    run_suite(exp_path)
 
-    suite = cfg["suite"]
-    suite_name = suite["name"]
-    hosts_cfg = load_hosts()
-
-    print(f"Running suite '{suite_name}' from {exp_path}")
-    for exp_name, params in cfg["experiments"].items():
-        run_single_experiment(suite, exp_name, params, hosts_cfg)
-
-
-# ---------- show ----------
 
 def cmd_show(args: argparse.Namespace) -> None:
     exp_path = Path(args.experiments).resolve()
-    cfg = load_yaml(exp_path)
-    if "suite" not in cfg:
-        raise SystemExit(f"{exp_path} does not look like a qtb experiments file")
+    show_suite_status(exp_path)
 
-    suite = cfg["suite"]
-    suite_name = suite["name"]
-    status_file = RUNS_DIR / suite_name / "status.yml"
-    st = load_yaml(status_file)
-    exps_status = st.get("experiments", {})
-
-    print(f"Suite: {suite_name}")
-    print(f"Status file: {status_file}")
-    print()
-    print(f"{'Experiment':<12} {'Status':<10} {'Log directory'}")
-    print("-" * 60)
-    for exp_name in cfg.get("experiments", {}).keys():
-        info = exps_status.get(exp_name, {})
-        status = info.get("status", "pending")
-        log_dir = info.get("log_dir", "-")
-        print(f"{exp_name:<12} {status:<10} {log_dir}")
-
-
-# ---------- analyze (placeholder) ----------
 
 def cmd_analyze(args: argparse.Namespace) -> None:
     exp_path = Path(args.experiments).resolve()
-    cfg = load_yaml(exp_path)
-    if "suite" not in cfg:
-        raise SystemExit(f"{exp_path} does not look like a qtb experiments file")
-    suite_name = cfg["suite"]["name"]
-    suite_dir = RUNS_DIR / suite_name
-    suite_dir.mkdir(parents=True, exist_ok=True)
-
-    # Placeholder: later you’ll generate a Jupyter notebook here.
-    analysis_path = suite_dir / "analysis_placeholder.txt"
-    analysis_text = (
-        "Analysis placeholder. In the next phase, qtb will generate a Jupyter "
-        "notebook here that loads qlogs from subdirectories.\n"
-    )
-    analysis_path.write_text(analysis_text)
-    print(f"Created analysis placeholder at {analysis_path}")
+    create_analysis_placeholder(exp_path)
 
 
 # ---------- CLI wiring ----------
@@ -369,4 +186,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    
