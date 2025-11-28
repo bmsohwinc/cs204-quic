@@ -14,6 +14,10 @@ from .utils import (
 )
 from .runs import run_suite, show_suite_status, create_analysis_placeholder
 
+# analyze (simple version)
+def cmd_analyze_client(args):
+    from .analyze_client import analyze_client
+    analyze_client(args.log_dir)
 
 # ---------- add-host / add-link ----------
 
@@ -168,13 +172,14 @@ def build_parser() -> argparse.ArgumentParser:
     ps.set_defaults(func=cmd_show)
 
     # analyze
-    pa = sub.add_parser(
-        "analyze",
-        help="Prepare analysis artifacts for a suite (notebook placeholder for now)",
-    )
-    pa.add_argument("experiments", help="Path to experiments YAML file")
-    pa.set_defaults(func=cmd_analyze)
+    analyze_parser = sub.add_parser("analyze", help="Analyze logs")
+    analyze_sub = analyze_parser.add_subparsers(dest="analyze_target", required=True)
 
+    client_p = analyze_sub.add_parser("client", help="Analyze a single qlog")
+    client_p.add_argument("--log-dir", required=True,
+                          help="Path to a single qlog file")
+    client_p.set_defaults(func=cmd_analyze_client)
+    
     return p
 
 

@@ -42,3 +42,24 @@ python examples/http3_client.py --ca-certs tests/pycacert.pem https://localhost:
 ## Connection migration tests
 - Check the `quiche/` directory
 - Coming soon...
+
+## QTB
+```sh
+# Terminal 1
+docker built -t qtb .
+
+docker run -it -p 8888:8888 -v $(pwd):/workspace qtb
+
+jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+
+# Terminal 2
+# connect to same container as above
+docker exec -it <container_id> bash
+
+python -m qtb.cli create-exps baseline --no-edit
+
+python -m qtb.cli run configs/experiments/baseline.yml
+
+python -m qtb.cli analyze client --log-dir runs/baseline/e0/client/d8ea3f73306782cf.qlog
+
+```
