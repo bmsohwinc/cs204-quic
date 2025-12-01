@@ -56,7 +56,7 @@ echo ""
 # Run load test
 echo "Running load test..."
 echo ""
-python3 client2.py --duration $DURATION --load-rps $RPS --filename $OUTPUT
+python3 client.py --duration $DURATION --load-rps $RPS --filename $OUTPUT
 
 echo ""
 echo "=========================================="
