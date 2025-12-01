@@ -36,19 +36,35 @@ async def handle_client(reader, writer):
             connection_close = b'connection: close' in request_lower
             keep_alive = not connection_close  # Keep alive unless explicitly told to close
             
-            # Simple HTTP response
-            body = f"Hello, World! (Request #{request_count})"
-            response = (
-                "HTTP/1.1 200 OK\r\n"
-                "Content-Type: text/plain\r\n"
-                f"Content-Length: {len(body)}\r\n"
-                "Connection: keep-alive\r\n"  # Support persistent connections
-                "\r\n"
-                f"{body}"
-            )
-            
-            writer.write(response.encode('ascii'))
-            await writer.drain()
+            # Read and serve page.html
+            try:
+                with open('tcp_tls/page.html', 'rb') as f:
+                    body = f.read()
+                
+                response_headers = (
+                    "HTTP/1.1 200 OK\r\n"
+                    "Content-Type: text/html\r\n"
+                    f"Content-Length: {len(body)}\r\n"
+                    "Connection: keep-alive\r\n"
+                    "\r\n"
+                ).encode('ascii')
+                
+                writer.write(response_headers + body)
+                await writer.drain()
+                
+            except FileNotFoundError:
+                # Fallback if page.html doesn't exist
+                error_body = b"404 Not Found - page.html missing"
+                error_response = (
+                    "HTTP/1.1 404 Not Found\r\n"
+                    "Content-Type: text/plain\r\n"
+                    f"Content-Length: {len(error_body)}\r\n"
+                    "Connection: keep-alive\r\n"
+                    "\r\n"
+                ).encode('ascii')
+                
+                writer.write(error_response + error_body)
+                await writer.drain()
             
             # If client sent Connection: close, exit after this response
             if not keep_alive:
