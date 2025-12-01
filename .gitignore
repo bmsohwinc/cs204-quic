@@ -9,5 +9,6 @@ build/
 *_log.json
 *.csv
 *.qlog
+*.json
 
 .ipynb_checkpoints/

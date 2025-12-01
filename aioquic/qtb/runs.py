@@ -106,7 +106,7 @@ def run_tcp_baseline(
 
     For now, we assume:
       - `python3 server.py`
-      - `python3 client.py --load-rps N --load-duration S`
+      - `python3 client.py --load-rps N --duration S`
     and that IPs / certs are hardcoded inside those scripts.
     """
     tcp_log_dir = log_dir / "tcp"
@@ -123,11 +123,11 @@ def run_tcp_baseline(
         print(f"[{suite_name}/{exp_name}] WARNING: no .qlog file found in {client_qlog_dir}; "
               "not passing --filename to TCP client")
 
-    server_cmd = "python3 server.py"
+    server_cmd = "python3 tcp_tls/server.py"
     client_cmd = (
-        f"python3 client.py "
+        f"python3 tcp_tls/client.py "
         f"--load-rps {int(load_rps)} "
-        f"--load-duration {int(load_duration)}"
+        f"--duration {int(load_duration)}"
         f"{filename_arg}"
     )
 

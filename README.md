@@ -46,9 +46,9 @@ python examples/http3_client.py --ca-certs tests/pycacert.pem https://localhost:
 ## QTB
 ```sh
 # Terminal 1
-docker built -t qtb .
+docker build -t qtb .
 
-docker run -it -p 8888:8888 -v $(pwd):/workspace qtb
+docker run --cap-add=NET_ADMIN -it -p 8888:8888 -v $(pwd):/workspace qtb
 
 jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 

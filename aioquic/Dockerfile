@@ -23,6 +23,10 @@ RUN pip install -e .
 
 RUN pip install pandas numpy matplotlib nbformat pyyaml jupyterlab
 
+# Lightweight qtb launcher
+RUN printf '#!/usr/bin/env bash\npython -m qtb.cli "$@"\n' > /usr/local/bin/qtb && \
+    chmod +x /usr/local/bin/qtb
+
 EXPOSE 8888
 
 CMD ["/bin/bash"]

@@ -69,7 +69,7 @@ async def main():
     ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     
     try:
-        ssl_ctx.load_cert_chain('cert.pem', 'key.pem')
+        ssl_ctx.load_cert_chain('tcp_tls/cert.pem', 'tcp_tls/key.pem')
     except FileNotFoundError:
         print("ERROR: cert.pem and key.pem not found!")
         print("\nGenerate them with:")
@@ -96,4 +96,3 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\nServer stopped")
-        
