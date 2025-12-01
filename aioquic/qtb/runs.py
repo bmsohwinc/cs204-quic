@@ -16,6 +16,13 @@ from .utils import (
     update_status,
 )
 
+def get_latest_qlog_file(qlog_dir: Path) -> Path | None:
+    """Return the newest .qlog file in qlog_dir, or None if none exist."""
+    qlogs = list(qlog_dir.glob("*.qlog"))
+    if not qlogs:
+        return None
+    return max(qlogs, key=lambda p: p.stat().st_mtime)
+
 # ---------- tc / netem helpers ----------
 
 def _run_tc(cmd: list[str]) -> None:
@@ -92,6 +99,7 @@ def run_tcp_baseline(
     load_rps: int,
     load_duration: int,
     log_dir: Path,
+    client_qlog_dir: Path,
 ) -> bool:
     """
     Run a simple TCP/TLS server+client under the *same* tc/netem config.
@@ -104,11 +112,23 @@ def run_tcp_baseline(
     tcp_log_dir = log_dir / "tcp"
     tcp_log_dir.mkdir(parents=True, exist_ok=True)
 
+    # Derive TCP metrics filename from latest QUIC qlog
+    latest_qlog = get_latest_qlog_file(client_qlog_dir)
+    filename_arg = ""
+    if latest_qlog is not None:
+        tcp_out = latest_qlog.with_name(latest_qlog.stem + "_tcp.json")
+        filename_arg = f" --filename {tcp_out}"
+        print(f"[{suite_name}/{exp_name}] TCP/TLS metrics file: {tcp_out}")
+    else:
+        print(f"[{suite_name}/{exp_name}] WARNING: no .qlog file found in {client_qlog_dir}; "
+              "not passing --filename to TCP client")
+
     server_cmd = "python3 server.py"
     client_cmd = (
         f"python3 client.py "
         f"--load-rps {int(load_rps)} "
         f"--load-duration {int(load_duration)}"
+        f"{filename_arg}"
     )
 
     print(f"[{suite_name}/{exp_name}] Comparing TCP/TLS baseline")
@@ -275,6 +295,7 @@ def run_single_experiment(
                     load_rps=int(load_rps),
                     load_duration=int(load_duration),
                     log_dir=log_dir,
+                    client_qlog_dir=client_qlog_dir,
                 )
                 overall_ok = overall_ok and tcp_ok
 
