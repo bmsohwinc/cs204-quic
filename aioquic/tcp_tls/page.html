@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Asyncio TLS Demo</title>
+  </head>
+  <body>
+    <h1>Asyncio TLS HTTP Demo</h1>
+    <p>
+      This is a static HTML page served over a TCP connection wrapped with TLS using Python's asyncio module.
+    </p>
+    <p>
+      The goal of this page is simply to provide a body of text with a character count similar to a small example page.
+      The content itself is not important, but we include enough text to make the payload non-trivial and realistic.
+    </p>
+    <h2>Demo information</h2>
+    <ul>
+      <li>The server listens on localhost using a self-signed certificate.</li>
+      <li>The client connects with TLS enabled and sends a basic HTTP GET request.</li>
+      <li>The server replies with this document and closes the connection.</li>
+    </ul>
+    <p>
+      In a more advanced setting, you might extend this demo to support multiple routes, query parameters, and dynamic
+      responses, but for now we are focusing on a very small and easy to understand example that is still large enough
+      to mimic a realistic scenario.
+    </p>
+    <p>
+      This final paragraph only exists to pad the total number of characters in the HTML document so that it is closer
+      in size to the reference page you provided earlier. It has no functional role in the client or server logic.
+    </p>
+  </body>
+</html>
