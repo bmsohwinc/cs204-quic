@@ -1,0 +1,857 @@
+[
+  {
+    "timestamp": 0.005669355392456055,
+    "tx_throughput_bps": 0.0,
+    "rx_throughput_bps": 0.0,
+    "total_bytes_sent": 0,
+    "total_bytes_received": 0,
+    "cwnd": null,
+    "rtt_ms": null
+  },
+  {
+    "timestamp": 0.11037898063659668,
+    "tx_throughput_bps": 27609.687201719553,
+    "rx_throughput_bps": 54197.50081970199,
+    "total_bytes_sent": 2891,
+    "total_bytes_received": 5675,
+    "cwnd": 10,
+    "rtt_ms": 0.049
+  },
+  {
+    "timestamp": 0.21695351600646973,
+    "tx_throughput_bps": 27680.158208167228,
+    "rx_throughput_bps": 54422.00596859997,
+    "total_bytes_sent": 5841,
+    "total_bytes_received": 11475,
+    "cwnd": 10,
+    "rtt_ms": 0.13
+  },
+  {
+    "timestamp": 0.3236873149871826,
+    "tx_throughput_bps": 26533.300857320282,
+    "rx_throughput_bps": 52616.88475095717,
+    "total_bytes_sent": 8673,
+    "total_bytes_received": 17091,
+    "cwnd": 10,
+    "rtt_ms": 0.165
+  },
+  {
+    "timestamp": 0.4297065734863281,
+    "tx_throughput_bps": 28381.635964981324,
+    "rx_throughput_bps": 56282.227252590084,
+    "total_bytes_sent": 11682,
+    "total_bytes_received": 23058,
+    "cwnd": 10,
+    "rtt_ms": 0.162
+  },
+  {
+    "timestamp": 0.5359840393066406,
+    "tx_throughput_bps": 27757.530509691314,
+    "rx_throughput_bps": 55044.5944005743,
+    "total_bytes_sent": 14632,
+    "total_bytes_received": 28908,
+    "cwnd": 10,
+    "rtt_ms": 0.153
+  },
+  {
+    "timestamp": 0.6423275470733643,
+    "tx_throughput_bps": 27185.48654932214,
+    "rx_throughput_bps": 53910.202140181194,
+    "total_bytes_sent": 17523,
+    "total_bytes_received": 34641,
+    "cwnd": 10,
+    "rtt_ms": 0.161
+  },
+  {
+    "timestamp": 0.7487800121307373,
+    "tx_throughput_bps": 27711.89937602745,
+    "rx_throughput_bps": 54954.10554229172,
+    "total_bytes_sent": 20473,
+    "total_bytes_received": 40491,
+    "cwnd": 10,
+    "rtt_ms": 0.171
+  },
+  {
+    "timestamp": 0.8557531833648682,
+    "tx_throughput_bps": 27577.00801019885,
+    "rx_throughput_bps": 54686.6091049706,
+    "total_bytes_sent": 23423,
+    "total_bytes_received": 46341,
+    "cwnd": 10,
+    "rtt_ms": 0.163
+  },
+  {
+    "timestamp": 0.962073564529419,
+    "tx_throughput_bps": 27191.399883392383,
+    "rx_throughput_bps": 53921.92858232049,
+    "total_bytes_sent": 26314,
+    "total_bytes_received": 52074,
+    "cwnd": 10,
+    "rtt_ms": 0.155
+  },
+  {
+    "timestamp": 1.0682601928710938,
+    "tx_throughput_bps": 27225.650208025076,
+    "rx_throughput_bps": 53989.84871760905,
+    "total_bytes_sent": 29205,
+    "total_bytes_received": 57807,
+    "cwnd": 10,
+    "rtt_ms": 0.162
+  },
+  {
+    "timestamp": 1.175499439239502,
+    "tx_throughput_bps": 28058.757422286646,
+    "rx_throughput_bps": 55641.94268487352,
+    "total_bytes_sent": 32214,
+    "total_bytes_received": 63774,
+    "cwnd": 10,
+    "rtt_ms": 0.161
+  },
+  {
+    "timestamp": 1.2810122966766357,
+    "tx_throughput_bps": 28517.8515025319,
+    "rx_throughput_bps": 56552.34958976665,
+    "total_bytes_sent": 35223,
+    "total_bytes_received": 69741,
+    "cwnd": 10,
+    "rtt_ms": 0.156
+  },
+  {
+    "timestamp": 1.3883118629455566,
+    "tx_throughput_bps": 27493.121385099777,
+    "rx_throughput_bps": 54520.25766197753,
+    "total_bytes_sent": 38173,
+    "total_bytes_received": 75591,
+    "cwnd": 10,
+    "rtt_ms": 0.155
+  },
+  {
+    "timestamp": 1.4943501949310303,
+    "tx_throughput_bps": 27263.725728881163,
+    "rx_throughput_bps": 54065.3544115101,
+    "total_bytes_sent": 41064,
+    "total_bytes_received": 81324,
+    "cwnd": 10,
+    "rtt_ms": 0.171
+  },
+  {
+    "timestamp": 1.6009962558746338,
+    "tx_throughput_bps": 27661.593629417,
+    "rx_throughput_bps": 54854.34668884388,
+    "total_bytes_sent": 44014,
+    "total_bytes_received": 87174,
+    "cwnd": 10,
+    "rtt_ms": 0.199
+  },
+  {
+    "timestamp": 1.7083652019500732,
+    "tx_throughput_bps": 28024.86296070951,
+    "rx_throughput_bps": 55574.728244118865,
+    "total_bytes_sent": 47023,
+    "total_bytes_received": 93141,
+    "cwnd": 10,
+    "rtt_ms": 0.153
+  },
+  {
+    "timestamp": 1.8140757083892822,
+    "tx_throughput_bps": 27348.274995376447,
+    "rx_throughput_bps": 54233.019906085494,
+    "total_bytes_sent": 49914,
+    "total_bytes_received": 98874,
+    "cwnd": 10,
+    "rtt_ms": 0.178
+  },
+  {
+    "timestamp": 1.9212543964385986,
+    "tx_throughput_bps": 28074.611238154557,
+    "rx_throughput_bps": 55673.38160786582,
+    "total_bytes_sent": 52923,
+    "total_bytes_received": 104841,
+    "cwnd": 10,
+    "rtt_ms": 0.159
+  },
+  {
+    "timestamp": 2.0279016494750977,
+    "tx_throughput_bps": 27108.05874212796,
+    "rx_throughput_bps": 53756.65886150799,
+    "total_bytes_sent": 55814,
+    "total_bytes_received": 110574,
+    "cwnd": 10,
+    "rtt_ms": 0.162
+  },
+  {
+    "timestamp": 2.133985757827759,
+    "tx_throughput_bps": 27808.12362765171,
+    "rx_throughput_bps": 55144.92312602118,
+    "total_bytes_sent": 58764,
+    "total_bytes_received": 116424,
+    "cwnd": 10,
+    "rtt_ms": 0.101
+  },
+  {
+    "timestamp": 2.2416417598724365,
+    "tx_throughput_bps": 27402.095043207497,
+    "rx_throughput_bps": 54776.32354908292,
+    "total_bytes_sent": 61714,
+    "total_bytes_received": 122321,
+    "cwnd": 10,
+    "rtt_ms": 0.149
+  },
+  {
+    "timestamp": 2.347945213317871,
+    "tx_throughput_bps": 27750.744725468692,
+    "rx_throughput_bps": 55501.489450937384,
+    "total_bytes_sent": 64664,
+    "total_bytes_received": 128221,
+    "cwnd": 10,
+    "rtt_ms": 0.166
+  },
+  {
+    "timestamp": 2.453788995742798,
+    "tx_throughput_bps": 27871.26397426685,
+    "rx_throughput_bps": 55742.5279485337,
+    "total_bytes_sent": 67614,
+    "total_bytes_received": 134121,
+    "cwnd": 10,
+    "rtt_ms": 0.147
+  },
+  {
+    "timestamp": 2.5612552165985107,
+    "tx_throughput_bps": 27999.4958047326,
+    "rx_throughput_bps": 55998.9916094652,
+    "total_bytes_sent": 70623,
+    "total_bytes_received": 140139,
+    "cwnd": 10,
+    "rtt_ms": 0.156
+  },
+  {
+    "timestamp": 2.666762590408325,
+    "tx_throughput_bps": 27960.131064560595,
+    "rx_throughput_bps": 55920.26212912119,
+    "total_bytes_sent": 73573,
+    "total_bytes_received": 146039,
+    "cwnd": 10,
+    "rtt_ms": 0.183
+  },
+  {
+    "timestamp": 2.774486780166626,
+    "tx_throughput_bps": 27932.444948077587,
+    "rx_throughput_bps": 55864.889896155175,
+    "total_bytes_sent": 76582,
+    "total_bytes_received": 152057,
+    "cwnd": 10,
+    "rtt_ms": 0.158
+  },
+  {
+    "timestamp": 2.880176544189453,
+    "tx_throughput_bps": 27911.879899389798,
+    "rx_throughput_bps": 55823.759798779596,
+    "total_bytes_sent": 79532,
+    "total_bytes_received": 157957,
+    "cwnd": 10,
+    "rtt_ms": 0.178
+  },
+  {
+    "timestamp": 2.9864814281463623,
+    "tx_throughput_bps": 27195.363866554526,
+    "rx_throughput_bps": 54390.72773310905,
+    "total_bytes_sent": 82423,
+    "total_bytes_received": 163739,
+    "cwnd": 10,
+    "rtt_ms": 0.159
+  },
+  {
+    "timestamp": 3.093312978744507,
+    "tx_throughput_bps": 25404.480088554825,
+    "rx_throughput_bps": 50808.96017710965,
+    "total_bytes_sent": 85137,
+    "total_bytes_received": 169167,
+    "cwnd": 10,
+    "rtt_ms": 0.176
+  },
+  {
+    "timestamp": 3.20025372505188,
+    "tx_throughput_bps": 27585.369486023606,
+    "rx_throughput_bps": 55170.73897204721,
+    "total_bytes_sent": 88087,
+    "total_bytes_received": 175067,
+    "cwnd": 10,
+    "rtt_ms": 0.169
+  },
+  {
+    "timestamp": 3.307208776473999,
+    "tx_throughput_bps": 28133.313574170425,
+    "rx_throughput_bps": 56266.62714834085,
+    "total_bytes_sent": 91096,
+    "total_bytes_received": 181085,
+    "cwnd": 10,
+    "rtt_ms": 0.151
+  },
+  {
+    "timestamp": 3.4138410091400146,
+    "tx_throughput_bps": 27665.18083926591,
+    "rx_throughput_bps": 55330.36167853182,
+    "total_bytes_sent": 94046,
+    "total_bytes_received": 186985,
+    "cwnd": 10,
+    "rtt_ms": 0.161
+  },
+  {
+    "timestamp": 3.521225690841675,
+    "tx_throughput_bps": 28020.756334313195,
+    "rx_throughput_bps": 56041.51266862639,
+    "total_bytes_sent": 97055,
+    "total_bytes_received": 193003,
+    "cwnd": 10,
+    "rtt_ms": 0.147
+  },
+  {
+    "timestamp": 3.6282694339752197,
+    "tx_throughput_bps": 25354.120853323355,
+    "rx_throughput_bps": 50708.24170664671,
+    "total_bytes_sent": 99769,
+    "total_bytes_received": 198431,
+    "cwnd": 10,
+    "rtt_ms": 0.184
+  },
+  {
+    "timestamp": 3.7350094318389893,
+    "tx_throughput_bps": 28189.994943042217,
+    "rx_throughput_bps": 56379.98988608443,
+    "total_bytes_sent": 102778,
+    "total_bytes_received": 204449,
+    "cwnd": 10,
+    "rtt_ms": 0.172
+  },
+  {
+    "timestamp": 3.841580867767334,
+    "tx_throughput_bps": 28234.582501291967,
+    "rx_throughput_bps": 56469.16500258393,
+    "total_bytes_sent": 105787,
+    "total_bytes_received": 210467,
+    "cwnd": 10,
+    "rtt_ms": 0.15
+  },
+  {
+    "timestamp": 3.9468681812286377,
+    "tx_throughput_bps": 28018.570357806828,
+    "rx_throughput_bps": 56037.140715613656,
+    "total_bytes_sent": 108737,
+    "total_bytes_received": 216367,
+    "cwnd": 10,
+    "rtt_ms": 0.163
+  },
+  {
+    "timestamp": 4.053147554397583,
+    "tx_throughput_bps": 27757.032357638953,
+    "rx_throughput_bps": 55514.064715277906,
+    "total_bytes_sent": 111687,
+    "total_bytes_received": 222267,
+    "cwnd": 10,
+    "rtt_ms": 0.175
+  },
+  {
+    "timestamp": 4.159304141998291,
+    "tx_throughput_bps": 27789.137411763648,
+    "rx_throughput_bps": 55578.274823527296,
+    "total_bytes_sent": 114637,
+    "total_bytes_received": 228167,
+    "cwnd": 10,
+    "rtt_ms": 0.152
+  },
+  {
+    "timestamp": 4.264966726303101,
+    "tx_throughput_bps": 27919.05970698202,
+    "rx_throughput_bps": 55838.11941396404,
+    "total_bytes_sent": 117587,
+    "total_bytes_received": 234067,
+    "cwnd": 10,
+    "rtt_ms": 0.172
+  },
+  {
+    "timestamp": 4.371483087539673,
+    "tx_throughput_bps": 27695.27578442213,
+    "rx_throughput_bps": 55390.55156884426,
+    "total_bytes_sent": 120537,
+    "total_bytes_received": 239967,
+    "cwnd": 10,
+    "rtt_ms": 0.159
+  },
+  {
+    "timestamp": 4.476174354553223,
+    "tx_throughput_bps": 28178.090533742346,
+    "rx_throughput_bps": 56356.18106748469,
+    "total_bytes_sent": 123487,
+    "total_bytes_received": 245867,
+    "cwnd": 10,
+    "rtt_ms": 0.163
+  },
+  {
+    "timestamp": 4.58376669883728,
+    "tx_throughput_bps": 27418.30768378483,
+    "rx_throughput_bps": 54836.61536756966,
+    "total_bytes_sent": 126437,
+    "total_bytes_received": 251767,
+    "cwnd": 10,
+    "rtt_ms": 0.148
+  },
+  {
+    "timestamp": 4.690670967102051,
+    "tx_throughput_bps": 28146.677853381774,
+    "rx_throughput_bps": 56293.35570676355,
+    "total_bytes_sent": 129446,
+    "total_bytes_received": 257785,
+    "cwnd": 10,
+    "rtt_ms": 0.179
+  },
+  {
+    "timestamp": 4.797898054122925,
+    "tx_throughput_bps": 27511.705129373888,
+    "rx_throughput_bps": 55023.410258747776,
+    "total_bytes_sent": 132396,
+    "total_bytes_received": 263685,
+    "cwnd": 10,
+    "rtt_ms": 0.16
+  },
+  {
+    "timestamp": 4.904118061065674,
+    "tx_throughput_bps": 26106.192983913144,
+    "rx_throughput_bps": 52212.38596782629,
+    "total_bytes_sent": 135169,
+    "total_bytes_received": 269231,
+    "cwnd": 10,
+    "rtt_ms": 0.18
+  },
+  {
+    "timestamp": 5.010131597518921,
+    "tx_throughput_bps": 27826.63515145518,
+    "rx_throughput_bps": 55653.27030291036,
+    "total_bytes_sent": 138119,
+    "total_bytes_received": 275131,
+    "cwnd": 10,
+    "rtt_ms": 0.186
+  },
+  {
+    "timestamp": 5.115636587142944,
+    "tx_throughput_bps": 27960.7629033716,
+    "rx_throughput_bps": 55921.5258067432,
+    "total_bytes_sent": 141069,
+    "total_bytes_received": 281031,
+    "cwnd": 10,
+    "rtt_ms": 0.177
+  },
+  {
+    "timestamp": 5.222586154937744,
+    "tx_throughput_bps": 27583.094170703487,
+    "rx_throughput_bps": 55166.188341406974,
+    "total_bytes_sent": 144019,
+    "total_bytes_received": 286931,
+    "cwnd": 10,
+    "rtt_ms": 0.164
+  },
+  {
+    "timestamp": 5.328935146331787,
+    "tx_throughput_bps": 27184.084795767387,
+    "rx_throughput_bps": 54368.169591534774,
+    "total_bytes_sent": 146910,
+    "total_bytes_received": 292713,
+    "cwnd": 10,
+    "rtt_ms": 0.169
+  },
+  {
+    "timestamp": 5.435298204421997,
+    "tx_throughput_bps": 28289.89739508965,
+    "rx_throughput_bps": 56579.7947901793,
+    "total_bytes_sent": 149919,
+    "total_bytes_received": 298731,
+    "cwnd": 10,
+    "rtt_ms": 0.148
+  },
+  {
+    "timestamp": 5.541767120361328,
+    "tx_throughput_bps": 28261.7698644984,
+    "rx_throughput_bps": 56523.5397289968,
+    "total_bytes_sent": 152928,
+    "total_bytes_received": 304749,
+    "cwnd": 10,
+    "rtt_ms": 0.17
+  },
+  {
+    "timestamp": 5.648805379867554,
+    "tx_throughput_bps": 28111.443645297593,
+    "rx_throughput_bps": 56222.88729059519,
+    "total_bytes_sent": 155937,
+    "total_bytes_received": 310767,
+    "cwnd": 10,
+    "rtt_ms": 0.15
+  },
+  {
+    "timestamp": 5.75585150718689,
+    "tx_throughput_bps": 28109.377474475707,
+    "rx_throughput_bps": 56218.75494895141,
+    "total_bytes_sent": 158946,
+    "total_bytes_received": 316785,
+    "cwnd": 10,
+    "rtt_ms": 0.167
+  },
+  {
+    "timestamp": 5.862356424331665,
+    "tx_throughput_bps": 27698.25167780728,
+    "rx_throughput_bps": 55396.50335561456,
+    "total_bytes_sent": 161896,
+    "total_bytes_received": 322685,
+    "cwnd": 10,
+    "rtt_ms": 0.178
+  },
+  {
+    "timestamp": 5.969212293624878,
+    "tx_throughput_bps": 27607.280905695403,
+    "rx_throughput_bps": 55214.561811390806,
+    "total_bytes_sent": 164846,
+    "total_bytes_received": 328585,
+    "cwnd": 10,
+    "rtt_ms": 0.159
+  },
+  {
+    "timestamp": 6.075215101242065,
+    "tx_throughput_bps": 27829.451561825248,
+    "rx_throughput_bps": 55658.903123650496,
+    "total_bytes_sent": 167796,
+    "total_bytes_received": 334485,
+    "cwnd": 10,
+    "rtt_ms": 0.179
+  },
+  {
+    "timestamp": 6.18190860748291,
+    "tx_throughput_bps": 27096.306999921788,
+    "rx_throughput_bps": 54192.613999843576,
+    "total_bytes_sent": 170687,
+    "total_bytes_received": 340267,
+    "cwnd": 10,
+    "rtt_ms": 0.169
+  },
+  {
+    "timestamp": 6.290060520172119,
+    "tx_throughput_bps": 27276.44779133287,
+    "rx_throughput_bps": 54552.89558266574,
+    "total_bytes_sent": 173637,
+    "total_bytes_received": 346167,
+    "cwnd": 10,
+    "rtt_ms": 0.139
+  },
+  {
+    "timestamp": 6.3971850872039795,
+    "tx_throughput_bps": 28088.794973659788,
+    "rx_throughput_bps": 56177.589947319575,
+    "total_bytes_sent": 176646,
+    "total_bytes_received": 352185,
+    "cwnd": 10,
+    "rtt_ms": 0.164
+  },
+  {
+    "timestamp": 6.504218578338623,
+    "tx_throughput_bps": 28112.69601787357,
+    "rx_throughput_bps": 56225.39203574714,
+    "total_bytes_sent": 179655,
+    "total_bytes_received": 358203,
+    "cwnd": 10,
+    "rtt_ms": 0.144
+  },
+  {
+    "timestamp": 6.61103081703186,
+    "tx_throughput_bps": 28170.92906967141,
+    "rx_throughput_bps": 56341.85813934282,
+    "total_bytes_sent": 182664,
+    "total_bytes_received": 364221,
+    "cwnd": 10,
+    "rtt_ms": 0.162
+  },
+  {
+    "timestamp": 6.7175822257995605,
+    "tx_throughput_bps": 27686.166087503272,
+    "rx_throughput_bps": 55372.332175006544,
+    "total_bytes_sent": 185614,
+    "total_bytes_received": 370121,
+    "cwnd": 10,
+    "rtt_ms": 0.173
+  },
+  {
+    "timestamp": 6.824305295944214,
+    "tx_throughput_bps": 27641.633584955398,
+    "rx_throughput_bps": 55283.267169910796,
+    "total_bytes_sent": 188564,
+    "total_bytes_received": 376021,
+    "cwnd": 10,
+    "rtt_ms": 0.162
+  },
+  {
+    "timestamp": 6.930950403213501,
+    "tx_throughput_bps": 27661.840993333364,
+    "rx_throughput_bps": 55323.68198666673,
+    "total_bytes_sent": 191514,
+    "total_bytes_received": 381921,
+    "cwnd": 10,
+    "rtt_ms": 0.18
+  },
+  {
+    "timestamp": 7.03894567489624,
+    "tx_throughput_bps": 27862.330943891913,
+    "rx_throughput_bps": 55724.66188778383,
+    "total_bytes_sent": 194523,
+    "total_bytes_received": 387939,
+    "cwnd": 10,
+    "rtt_ms": 0.15
+  },
+  {
+    "timestamp": 7.143465757369995,
+    "tx_throughput_bps": 28224.2410279455,
+    "rx_throughput_bps": 56448.482055891,
+    "total_bytes_sent": 197473,
+    "total_bytes_received": 393839,
+    "cwnd": 10,
+    "rtt_ms": 0.125
+  },
+  {
+    "timestamp": 7.250925302505493,
+    "tx_throughput_bps": 27452.19139240057,
+    "rx_throughput_bps": 54904.38278480114,
+    "total_bytes_sent": 200423,
+    "total_bytes_received": 399739,
+    "cwnd": 10,
+    "rtt_ms": 0.168
+  },
+  {
+    "timestamp": 7.3586015701293945,
+    "tx_throughput_bps": 27396.93773844345,
+    "rx_throughput_bps": 54793.8754768869,
+    "total_bytes_sent": 203373,
+    "total_bytes_received": 405639,
+    "cwnd": 10,
+    "rtt_ms": 0.173
+  },
+  {
+    "timestamp": 7.464546203613281,
+    "tx_throughput_bps": 28401.62735055045,
+    "rx_throughput_bps": 56803.2547011009,
+    "total_bytes_sent": 206382,
+    "total_bytes_received": 411657,
+    "cwnd": 10,
+    "rtt_ms": 0.165
+  },
+  {
+    "timestamp": 7.5701799392700195,
+    "tx_throughput_bps": 27368.15073353496,
+    "rx_throughput_bps": 54736.30146706992,
+    "total_bytes_sent": 209273,
+    "total_bytes_received": 417439,
+    "cwnd": 10,
+    "rtt_ms": 0.176
+  },
+  {
+    "timestamp": 7.677309274673462,
+    "tx_throughput_bps": 27536.808558463323,
+    "rx_throughput_bps": 55073.617116926645,
+    "total_bytes_sent": 212223,
+    "total_bytes_received": 423339,
+    "cwnd": 10,
+    "rtt_ms": 0.161
+  },
+  {
+    "timestamp": 7.783797740936279,
+    "tx_throughput_bps": 28256.5812580461,
+    "rx_throughput_bps": 56513.1625160922,
+    "total_bytes_sent": 215232,
+    "total_bytes_received": 429357,
+    "cwnd": 10,
+    "rtt_ms": 0.155
+  },
+  {
+    "timestamp": 7.890293121337891,
+    "tx_throughput_bps": 27700.732077533055,
+    "rx_throughput_bps": 55401.46415506611,
+    "total_bytes_sent": 218182,
+    "total_bytes_received": 435257,
+    "cwnd": 10,
+    "rtt_ms": 0.159
+  },
+  {
+    "timestamp": 7.997133016586304,
+    "tx_throughput_bps": 27059.18040520487,
+    "rx_throughput_bps": 54118.36081040974,
+    "total_bytes_sent": 221073,
+    "total_bytes_received": 441039,
+    "cwnd": 10,
+    "rtt_ms": 0.165
+  },
+  {
+    "timestamp": 8.104510307312012,
+    "tx_throughput_bps": 28022.68505438825,
+    "rx_throughput_bps": 56045.3701087765,
+    "total_bytes_sent": 224082,
+    "total_bytes_received": 447057,
+    "cwnd": 10,
+    "rtt_ms": 0.169
+  },
+  {
+    "timestamp": 8.210286140441895,
+    "tx_throughput_bps": 28446.951548046232,
+    "rx_throughput_bps": 56893.903096092465,
+    "total_bytes_sent": 227091,
+    "total_bytes_received": 453075,
+    "cwnd": 10,
+    "rtt_ms": 0.158
+  },
+  {
+    "timestamp": 8.31680941581726,
+    "tx_throughput_bps": 27693.478158691647,
+    "rx_throughput_bps": 55386.956317383294,
+    "total_bytes_sent": 230041,
+    "total_bytes_received": 458975,
+    "cwnd": 10,
+    "rtt_ms": 0.154
+  },
+  {
+    "timestamp": 8.424129962921143,
+    "tx_throughput_bps": 26937.991633621026,
+    "rx_throughput_bps": 53875.98326724205,
+    "total_bytes_sent": 232932,
+    "total_bytes_received": 464757,
+    "cwnd": 10,
+    "rtt_ms": 0.187
+  },
+  {
+    "timestamp": 8.529187202453613,
+    "tx_throughput_bps": 28079.93064664739,
+    "rx_throughput_bps": 56159.86129329478,
+    "total_bytes_sent": 235882,
+    "total_bytes_received": 470657,
+    "cwnd": 10,
+    "rtt_ms": 0.1
+  },
+  {
+    "timestamp": 8.635149717330933,
+    "tx_throughput_bps": 27840.033840414544,
+    "rx_throughput_bps": 55680.06768082909,
+    "total_bytes_sent": 238832,
+    "total_bytes_received": 476557,
+    "cwnd": 10,
+    "rtt_ms": 0.167
+  },
+  {
+    "timestamp": 8.74249792098999,
+    "tx_throughput_bps": 27480.664784753393,
+    "rx_throughput_bps": 54961.329569506786,
+    "total_bytes_sent": 241782,
+    "total_bytes_received": 482457,
+    "cwnd": 10,
+    "rtt_ms": 0.163
+  },
+  {
+    "timestamp": 8.848293781280518,
+    "tx_throughput_bps": 27326.210988416642,
+    "rx_throughput_bps": 54652.421976833284,
+    "total_bytes_sent": 244673,
+    "total_bytes_received": 488239,
+    "cwnd": 10,
+    "rtt_ms": 0.178
+  },
+  {
+    "timestamp": 8.955849170684814,
+    "tx_throughput_bps": 27427.728320624225,
+    "rx_throughput_bps": 54855.45664124845,
+    "total_bytes_sent": 247623,
+    "total_bytes_received": 494139,
+    "cwnd": 10,
+    "rtt_ms": 0.158
+  },
+  {
+    "timestamp": 9.06103229522705,
+    "tx_throughput_bps": 28046.32409275336,
+    "rx_throughput_bps": 56092.64818550672,
+    "total_bytes_sent": 250573,
+    "total_bytes_received": 500039,
+    "cwnd": 10,
+    "rtt_ms": 0.174
+  },
+  {
+    "timestamp": 9.166947364807129,
+    "tx_throughput_bps": 26738.404754186926,
+    "rx_throughput_bps": 53476.80950837385,
+    "total_bytes_sent": 253405,
+    "total_bytes_received": 505703,
+    "cwnd": 10,
+    "rtt_ms": 0.149
+  },
+  {
+    "timestamp": 9.273647785186768,
+    "tx_throughput_bps": 27647.501195439898,
+    "rx_throughput_bps": 55295.002390879796,
+    "total_bytes_sent": 256355,
+    "total_bytes_received": 511603,
+    "cwnd": 10,
+    "rtt_ms": 0.161
+  },
+  {
+    "timestamp": 9.380095958709717,
+    "tx_throughput_bps": 27713.0166011163,
+    "rx_throughput_bps": 55426.0332022326,
+    "total_bytes_sent": 259305,
+    "total_bytes_received": 517503,
+    "cwnd": 10,
+    "rtt_ms": 0.188
+  },
+  {
+    "timestamp": 9.483830690383911,
+    "tx_throughput_bps": 27869.161594594283,
+    "rx_throughput_bps": 55738.323189188566,
+    "total_bytes_sent": 262196,
+    "total_bytes_received": 523285,
+    "cwnd": 10,
+    "rtt_ms": 0.173
+  },
+  {
+    "timestamp": 9.587444067001343,
+    "tx_throughput_bps": 29040.651875578136,
+    "rx_throughput_bps": 58081.30375115627,
+    "total_bytes_sent": 265205,
+    "total_bytes_received": 529303,
+    "cwnd": 10,
+    "rtt_ms": 0.071
+  },
+  {
+    "timestamp": 9.693729639053345,
+    "tx_throughput_bps": 28310.521756685823,
+    "rx_throughput_bps": 56621.043513371646,
+    "total_bytes_sent": 268214,
+    "total_bytes_received": 535321,
+    "cwnd": 10,
+    "rtt_ms": 0.141
+  },
+  {
+    "timestamp": 9.800874471664429,
+    "tx_throughput_bps": 27532.825691258084,
+    "rx_throughput_bps": 55065.65138251617,
+    "total_bytes_sent": 271164,
+    "total_bytes_received": 541221,
+    "cwnd": 10,
+    "rtt_ms": 0.159
+  },
+  {
+    "timestamp": 9.907327651977539,
+    "tx_throughput_bps": 27711.713180603678,
+    "rx_throughput_bps": 55423.426361207356,
+    "total_bytes_sent": 274114,
+    "total_bytes_received": 547121,
+    "cwnd": 10,
+    "rtt_ms": 0.153
+  },
+  {
+    "timestamp": 10.009222030639648,
+    "tx_throughput_bps": 28372.517090337315,
+    "rx_throughput_bps": 56745.03418067463,
+    "total_bytes_sent": 277005,
+    "total_bytes_received": 552903,
+    "cwnd": null,
+    "rtt_ms": null
+  }
+]

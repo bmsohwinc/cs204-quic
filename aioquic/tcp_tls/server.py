@@ -1,49 +1,99 @@
 import asyncio
 import ssl
-from pathlib import Path
 
 HOST = "127.0.0.1"
 PORT = 8443
 
-HTML_BODY = Path("page.html").read_bytes()
-
-async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
-    ssl_obj = writer.get_extra_info("ssl_object")
-    if ssl_obj is None:
-        print("⚠ Connection is NOT using TLS")
-    else:
-        print("✅ TLS in use")
-        print("  TLS version:", ssl_obj.version())
-        print("  Cipher:", ssl_obj.cipher())
-        
-    # Read and ignore the request content (simple demo)
-    await reader.read(1024)
-
-    response = (
-        b"HTTP/1.1 200 OK\r\n"
-        b"Content-Type: text/html; charset=utf-8\r\n"
-        b"Content-Length: " + str(len(HTML_BODY)).encode() + b"\r\n"
-        b"Connection: close\r\n"
-        b"\r\n" +
-        HTML_BODY
-    )
-
-    writer.write(response)
-    await writer.drain()
-    writer.close()
-    await writer.wait_closed()
+async def handle_client(reader, writer):
+    """Handle multiple HTTP requests on a persistent connection"""
+    addr = writer.get_extra_info('peername')
+    print(f"Connection from {addr}")
+    
+    request_count = 0
+    
+    try:
+        while True:
+            # Read one HTTP request
+            request_data = b''
+            
+            # Read until we get the end of headers
+            while b'\r\n\r\n' not in request_data:
+                chunk = await reader.read(1024)
+                if not chunk:
+                    # Connection closed by client
+                    print(f"  {addr}: Connection closed after {request_count} requests")
+                    return
+                request_data += chunk
+            
+            request_count += 1
+            
+            # Parse request line
+            request_line = request_data.split(b'\r\n')[0].decode('ascii')
+            
+            # Check if client wants to close connection
+            # Look for "Connection: close" header (case-insensitive)
+            request_lower = request_data.lower()
+            connection_close = b'connection: close' in request_lower
+            keep_alive = not connection_close  # Keep alive unless explicitly told to close
+            
+            # Simple HTTP response
+            body = f"Hello, World! (Request #{request_count})"
+            response = (
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: text/plain\r\n"
+                f"Content-Length: {len(body)}\r\n"
+                "Connection: keep-alive\r\n"  # Support persistent connections
+                "\r\n"
+                f"{body}"
+            )
+            
+            writer.write(response.encode('ascii'))
+            await writer.drain()
+            
+            # If client sent Connection: close, exit after this response
+            if not keep_alive:
+                print(f"  {addr}: Client requested close after {request_count} requests")
+                break
+                
+    except Exception as e:
+        print(f"  {addr}: Error after {request_count} requests: {e}")
+    finally:
+        try:
+            writer.close()
+            await writer.wait_closed()
+        except:
+            pass
 
 async def main():
-    ssl_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    ssl_ctx.load_cert_chain("cert.pem", "key.pem")
-
+    # Create SSL context
+    ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    
+    try:
+        ssl_ctx.load_cert_chain('cert.pem', 'key.pem')
+    except FileNotFoundError:
+        print("ERROR: cert.pem and key.pem not found!")
+        print("\nGenerate them with:")
+        print("  openssl req -x509 -newkey rsa:2048 -nodes \\")
+        print("    -keyout key.pem -out cert.pem -days 365 \\")
+        print("    -subj '/CN=localhost'")
+        return
+    
     server = await asyncio.start_server(
         handle_client, HOST, PORT, ssl=ssl_ctx
     )
-
-    print(f"Serving on https://{HOST}:{PORT}")
+    
+    addr = server.sockets[0].getsockname()
+    print(f'Serving on {addr}')
+    print('Supports HTTP/1.1 persistent connections')
+    print('Press Ctrl+C to stop')
+    print()
+    
     async with server:
         await server.serve_forever()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nServer stopped")
+        
