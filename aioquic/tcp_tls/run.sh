@@ -29,7 +29,7 @@ fi
 
 # Start server in background
 echo "Starting TLS server..."
-python3 server.py &
+python3 server-2.py &
 SERVER_PID=$!
 
 # Give server time to start
@@ -56,7 +56,7 @@ echo ""
 # Run load test
 echo "Running load test..."
 echo ""
-python3 client.py --duration $DURATION --load-rps $RPS --filename $OUTPUT
+python3 client-2.py --duration $DURATION --load-rps $RPS --filename $OUTPUT
 
 echo ""
 echo "=========================================="
