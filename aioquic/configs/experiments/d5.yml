@@ -1,0 +1,23 @@
+suite:
+  name: d5
+  implementation: aioquic
+  src: h1
+  dest: h2
+  link: lo
+  duration: 30
+  load_rps: 100
+  compare_tcp: true
+  metrics:
+  - cwnd
+  - goodput
+experiments:
+  e0:
+    rtt_ms: 10
+    loss_pct: 0.0
+    bw_mbit: 20
+    delay_ms: 5
+  e1:
+    rtt_ms: 50
+    loss_pct: 2.5
+    bw_mbit: 10
+    delay_ms: 5

@@ -64,7 +64,7 @@ def cmd_create_exps(args: argparse.Namespace) -> None:
             "src": "h1",
             "dest": "h2",
             "link": "lo",
-            "duration": 30,       # default load duration (seconds)
+            "duration": 10,       # default load duration (seconds)
             "load_rps": 100,      # default load RPS
             "compare_tcp": True,
             "metrics": ["cwnd", "goodput"],

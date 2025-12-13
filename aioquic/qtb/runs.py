@@ -220,7 +220,7 @@ def run_single_experiment(
     # Load parameters for the client from CONFIG, not CLI.
     # Per-experiment overrides suite-level.
     load_rps = params.get("load_rps", suite.get("load_rps", 100))
-    load_duration = params.get("duration", suite.get("duration", 30))
+    load_duration = params.get("duration", suite.get("duration", 10))
 
     # Build commands from implementation template
     port = impl.get("default_port", 4433)
