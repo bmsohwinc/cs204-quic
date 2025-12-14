@@ -78,8 +78,8 @@ async def run_tcp_client(
                 if not line:
                     continue
 
-                server_msg = json.loads(line)
                 client_ts = time.time()
+                server_msg = json.loads(line)
 
                 # ✅ log line: counter, server_ts, client_ts
                 log_msg = {

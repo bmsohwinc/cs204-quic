@@ -205,9 +205,15 @@ async def run_quic_client(
         with open(out_path, "w", buffering=1) as f:
             while True:
                 line = await client.read_line()
+                client_ts = time.time()
                 msg = json.loads(line.decode("utf-8"))
+                log_msg = {
+                    "counter": msg.get("counter"),
+                    "server_ts": msg.get("timestamp"),
+                    "client_ts": client_ts,
+                }
                 # log whatever your TCP client logs (keep your format consistent)
-                f.write(json.dumps(msg) + "\n")
+                f.write(json.dumps(log_msg) + "\n")
 
                 if msg.get("counter") == migrate_at_counter:
                     await client.migrate(migrate_to_local_port)
