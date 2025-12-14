@@ -2,6 +2,7 @@ import argparse
 import asyncio
 
 from quic import run_quic_client, run_quic_server
+from tcp import run_tcp_client, run_tcp_server
 
 def parse_args():
     p = argparse.ArgumentParser()
@@ -16,6 +17,7 @@ def parse_args():
     p.add_argument("--key", default="key.pem")
     p.add_argument("--interval", type=float, default=0.1)
     p.add_argument("--out", default="client.log")
+    p.add_argument("--out-tcp", default="client_tcp.log")
     p.add_argument("--migrate-at", type=int, default=5)
     p.add_argument("--migrate-local-port", type=int, default=5555)
     return p.parse_args()
@@ -24,13 +26,15 @@ async def entry():
     args = parse_args()
 
     if args.proto == "tcp":
-        # ✅ DO NOT TOUCH YOUR TCP IMPLEMENTATION.
-        # Call into your existing TCP server/client entrypoints here.
         if args.mode == "server":
-            # await run_tcp_server(args.host, args.port)   # <-- your existing function
+            await run_tcp_server(args.host, args.port, args.cert, args.key, args.interval)   # <-- your existing function
             pass
         else:
-            # await run_tcp_client(args.host, args.port)   # <-- your existing function
+            await run_tcp_client(
+                args.host,
+                args.port,
+                out_path=args.out_tcp,
+                disconnect_at_counter=args.migrate_at)
             pass
 
     elif args.proto == "quic":
