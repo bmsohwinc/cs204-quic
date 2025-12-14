@@ -209,7 +209,7 @@ async def run_quic_client(
                 msg = json.loads(line.decode("utf-8"))
                 log_msg = {
                     "counter": msg.get("counter"),
-                    "server_ts": msg.get("timestamp"),
+                    "server_ts": msg.get("ts"),
                     "client_ts": client_ts,
                 }
                 # log whatever your TCP client logs (keep your format consistent)
