@@ -21,6 +21,8 @@ git checkout quic-migration
 cd aioquic
 ```
 - Setup Docker on your system
+
+# Execution
 - Run below Docker commands
 ```sh
 # Terminal 1
@@ -42,3 +44,23 @@ qtb run configs/experiments/exp_1.yml
 qtb analyze client --log-dir runs/exp1/e0/client/<LOG_NAME>.qlog
 
 ```
+
+# Testing Migration
+- Go to `migration` directory under repo
+- Create virtual environment
+```
+python -m venv .venv
+```
+- install aioquic
+```
+pip install aioquic
+```
+- Start server 
+```
+python run.py --proto quic --mode server --host 10.10.1.1 --port 4433
+```
+- Start client
+```
+python run.py --proto quic --mode client --host 10.10.1.1 --port 4433 --out quic_client.log --migrate-at 5
+```
+- Run both tcp/quic using a single command as above
