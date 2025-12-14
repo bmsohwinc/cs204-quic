@@ -3,47 +3,18 @@ QUIC testbed
 
 Course: [CS 204 - Advanced Computer Networks](https://cs.ucr.edu/~ztan/courses/CS204/F25/index.html)
 Instructor: [Prof. Zhaowei Tan](https://cs.ucr.edu/~ztan/)
-
+TA: Yuanhao Chang
 # Task
 - Setup a QUIC testbed to study packet metrics
 
 # Setup
-- Clone [aioquic](https://github.com/aiortc/aioquic)
-- Run below installs once inside the virtual env:
+- Clone this repository https://github.com/bmsohwinc/cs204-quic/tree/quic-migration
+- Enter the `aioquic` directory inside the repo folder
 ```sh
-brew install openssl
-
-export CFLAGS=-I$(brew --prefix openssl)/include
-export LDFLAGS=-L$(brew --prefix openssl)/lib
-
-pip install . dnslib jinja2 starlette wsproto
+cd aioquic
 ```
-
-
-# Test
-## Basic
-- Ensure you are inside the `aioquic/` directory
-- Start server:
-```sh
-python examples/http3_server.py --certificate tests/ssl_cert.pem --private-key tests/ssl_key.pem
-```
-- Start client:
-```sh
-python examples/http3_client.py --ca-certs tests/pycacert.pem https://localhost:4433/
-```
-## Advanced
-- Start server as before
-- Run below bash script to vary network conditions using tc/netem
-    - ensure you modify experiment parameters before running
-```sh
-./evaluate.sh
-```
-
-## Connection migration tests
-- Check the `quiche/` directory
-- Coming soon...
-
-## QTB
+- Setup Docker on your system
+- Run below Docker commands
 ```sh
 # Terminal 1
 docker build -t qtb .
@@ -51,15 +22,16 @@ docker build -t qtb .
 docker run --cap-add=NET_ADMIN -it -p 8888:8888 -v $(pwd):/workspace qtb
 
 jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
-
+```
+- Open another terminal, connect to the same Docker container
+```sh
 # Terminal 2
-# connect to same container as above
 docker exec -it <container_id> bash
 
-python -m qtb.cli create-exps baseline --no-edit
+qtb create-exps exp_1 --no-edit
 
-python -m qtb.cli run configs/experiments/baseline.yml
+qtb run configs/experiments/exp_1.yml
 
-python -m qtb.cli analyze client --log-dir runs/baseline/e0/client/d8ea3f73306782cf.qlog
+qtb analyze client --log-dir runs/exp1/e0/client/<LOG_NAME>.qlog
 
 ```
