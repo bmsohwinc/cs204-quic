@@ -12,6 +12,10 @@ TA: Yuanhao Chang
 
 # Setup
 - Clone this repository https://github.com/bmsohwinc/cs204-quic/tree/quic-migration
+- Switch to `quic-migration` branch
+```sh
+git checkout quic-migration
+```
 - Enter the `aioquic` directory inside the repo folder
 ```sh
 cd aioquic
