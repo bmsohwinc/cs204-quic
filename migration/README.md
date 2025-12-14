@@ -1,0 +1,13 @@
+# Connection Migration: QUIC v/s TCP v/s TCP/TLS
+
+## Setup
+- Generate self-signed certificates:
+```sh
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes -subj "/CN=localhost"
+```
+
+## Run tests
+- All in one:
+```sh
+python tcp-tls.py
+```
